@@ -14,7 +14,13 @@ jQuery(function ($) {
     'success':onListLoad
   });
 
-  function onListLoad(data,status,xhr) {
-    console.log(arguments);
+  function onListLoad(data) {
+    console.log('onListLoad', arguments);
+    if(!data || data.stat!='ok') return;
+    var pic = data.photoset.photo[10];
+    var href = 'https://farm'+pic.farm +
+      '.staticflickr.com/'+pic.server +
+      '/'+pic.id+'_'+pic.secret+'_z.jpg';
+    $('#primary-pictures img')[0].src = href;
   }
 });
