@@ -14,13 +14,23 @@ jQuery(function ($) {
     'success':onListLoad
   });
 
+  var n, photos;
   function onListLoad(data) {
     console.log('onListLoad', arguments);
     if(!data || data.stat!='ok') return;
-    var pic = data.photoset.photo[10];
-    var href = 'https://farm'+pic.farm +
-      '.staticflickr.com/'+pic.server +
-      '/'+pic.id+'_'+pic.secret+'_z.jpg';
-    $('#primary-pictures img')[0].src = href;
+    photos = data.photoset.photo;
+    n = Math.floor(Math.random()*10) % photos.length;
+    changePhoto();
+  }
+  function changePhoto() {
+    console.log('changePhoto', n);
+    $('#primary-pictures img')[0].src = getHref(photos[n]);
+    n = (n+29) % photos.length;
+    setTimeout(changePhoto, 4000);
+  }
+  function getHref(ph) {
+    return 'https://farm'+ph.farm +
+    '.staticflickr.com/'+ph.server +
+    '/'+ph.id+'_'+ph.secret+'_z.jpg';
   }
 });
