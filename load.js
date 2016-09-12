@@ -1,8 +1,9 @@
 jQuery(function ($) {
-  var apikey = document.currentScript.dataset.apikey;
-  var albumid = document.currentScript.dataset.album;
-  var interval = Number(document.currentScript.dataset.interval) || 4000;
-  var setsize = Number(document.currentScript.dataset.setsize) || 500;
+  var dataset = $('script[src*="/hbySlideshow/"]')[0].dataset;
+  var apikey = dataset.apikey;
+  var albumid = dataset.album;
+  var interval = Number(dataset.interval) || 4000;
+  var setsize = Number(dataset.setsize) || 500;
   if(!(
       apikey.constructor===String &&
       albumid.constructor===String
